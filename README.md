@@ -1,7 +1,6 @@
 # Better Json
 
-[![Go CI](https://github.com/FrancisPatron/betterjson/actions/workflows/go.yml/badge.svg)](https://github.com/FrancisPatron/betterjson/actions/workflows/go.yml)
-[![Release](https://github.com/FrancisPatron/betterjson/actions/workflows/release.yml/badge.svg)](https://github.com/FrancisPatron/betterjson/actions/workflows/release.yml)
+[![Go CI](https://github.com/FrancisPatron/betterjson/actions/workflows/go.yml/badge.svg)](https://github.com/fpatron/betterjson/actions/workflows/go.yml)
 
 `Better Json` is a Go library that enhances JSON parsing by supporting comments within JSON files.
 
@@ -27,13 +26,10 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"github.com/FrancisPatron/betterjson"
+	"github.com/fpatron/betterjson"
 )
 
-// ... [Your struct definitions here]
-
 func main() {
-	// Read example.json
 	data, err := os.ReadFile("example.json")
 	if err != nil {
 		log.Fatalf("Failed to read example.json: %v", err)
@@ -49,8 +45,12 @@ func main() {
 }
 
 ```
-for a complete example checkout this [example code](https://github.com/FrancisPatron/betterjson/blob/main/example/main.go)
+for a complete example checkout this [example code](https://github.com/fpatron/betterjson/blob/main/example/main.go)
 
-## How It Works
-`betterjson` offers a streamlined approach to parsing JSON files with comments. At its core, it employs a single, two-step function. First, the `uncommenter` strips away comments from the JSON content. Instead of simply removing comments, it replaces them with whitespaces, ensuring that the original structure and line count remain intact. This replacement is crucial, as it preserves the accuracy of line and column numbers. Once the comments are replaced, the standard `json.Unmarshal` function takes over, parsing the now-comment-free JSON. This approach ensures that any errors reported by `json.Unmarshal` accurately reflect the correct line and column numbers from the original file, providing precise feedback even in the presence of comments.
+## v2 — encoding/json/v2 support
 
+A separate `betterjson/v2` module is available for projects that want to use Go's experimental [`encoding/json/v2`](https://pkg.go.dev/encoding/json/v2) backend. It exposes the same behaviour with the richer v2 `Unmarshal(data, v, ...json.Options)` signature.
+
+> **Note:** `encoding/json/v2` requires Go 1.26 and the `GOEXPERIMENT=jsonv2` build flag.
+
+See the [v2 README](v2/README.md) for installation instructions, a full API comparison, and usage examples.

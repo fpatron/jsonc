@@ -28,3 +28,15 @@ jobs:
 
     - name: Test
       run: go test -v ./...
+
+    - name: Get v2 dependencies
+      run: go mod download
+      working-directory: ./v2
+
+    - name: Build v2
+      run: GOEXPERIMENT=jsonv2 go build -v ./...
+      working-directory: ./v2
+
+    - name: Test v2
+      run: GOEXPERIMENT=jsonv2 go test -v ./...
+      working-directory: ./v2
