@@ -17,7 +17,7 @@ func decomment(data []byte) []byte {
 		// OUTSIDE
 		func(i int, data, result []byte) int {
 			if data[i] == '/' && i+1 < len(data) {
-				if result[i+1] == '/' {
+				if data[i+1] == '/' {
 					state = SINGLE_LINE
 					result[i] = ' '
 					result[i+1] = ' '
@@ -61,7 +61,9 @@ func decomment(data []byte) []byte {
 		},
 		// IN_STRING
 		func(i int, data, result []byte) int {
-			if data[i] == '"' {
+			if data[i] == '\\' && i+1 < len(data) {
+				return i + 1 // skip the escaped character
+			} else if data[i] == '"' {
 				state = OUTSIDE
 			}
 			return i
