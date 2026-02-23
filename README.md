@@ -1,6 +1,6 @@
 # jsonc
 
-[![Go CI](https://github.com/FrancisPatron/jsonc/actions/workflows/go.yml/badge.svg)](https://github.com/fpatron/jsonc/actions/workflows/go.yml)
+[![Go CI](https://github.com/fpatron/jsonc/actions/workflows/go.yml/badge.svg)](https://github.com/fpatron/jsonc/actions/workflows/go.yml)
 
 `jsonc` is a Go library that enhances JSON parsing by supporting comments within JSON files.
 
