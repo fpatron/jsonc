@@ -1,13 +1,13 @@
-# Better Json
+# jsonc
 
-[![Go CI](https://github.com/FrancisPatron/betterjson/actions/workflows/go.yml/badge.svg)](https://github.com/fpatron/betterjson/actions/workflows/go.yml)
+[![Go CI](https://github.com/FrancisPatron/jsonc/actions/workflows/go.yml/badge.svg)](https://github.com/fpatron/jsonc/actions/workflows/go.yml)
 
-`Better Json` is a Go library that enhances JSON parsing by supporting comments within JSON files.
+`jsonc` is a Go library that enhances JSON parsing by supporting comments within JSON files.
 
 ## Instalation
-To install `betterjson`, use `go get`:   
+To install `jsonc`, use `go get`:   
 ```sh
- go get github.com/fpatron/betterjson
+ go get github.com/fpatron/jsonc
 ```
 
 ## Features
@@ -17,7 +17,7 @@ To install `betterjson`, use `go get`:
 
 ## Usage
 
-Here's a basic example of how to use `betterjson`:
+Here's a basic example of how to use `jsonc`:
 
 ```go
 package main
@@ -26,7 +26,7 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"github.com/fpatron/betterjson"
+	"github.com/fpatron/jsonc"
 )
 
 func main() {
@@ -36,7 +36,7 @@ func main() {
 	}
 
 	var example ExampleData
-	err = betterjson.Unmarshal(data, &example)
+	err = jsonc.Unmarshal(data, &example)
 	if err != nil {
 		log.Fatalf("Failed to parse example.json: %v", err)
 	}
@@ -45,11 +45,11 @@ func main() {
 }
 
 ```
-for a complete example checkout this [example code](https://github.com/fpatron/betterjson/blob/main/example/main.go)
+for a complete example checkout this [example code](https://github.com/fpatron/jsonc/blob/main/example/main.go)
 
 ## v2 — encoding/json/v2 support
 
-A separate `betterjson/v2` module is available for projects that want to use Go's experimental [`encoding/json/v2`](https://pkg.go.dev/encoding/json/v2) backend. It exposes the same behaviour with the richer v2 `Unmarshal(data, v, ...json.Options)` signature.
+A separate `jsonc/v2` module is available for projects that want to use Go's experimental [`encoding/json/v2`](https://pkg.go.dev/encoding/json/v2) backend. It exposes the same behaviour with the richer v2 `Unmarshal(data, v, ...json.Options)` signature.
 
 > **Note:** `encoding/json/v2` requires Go 1.26 and the `GOEXPERIMENT=jsonv2` build flag.
 
