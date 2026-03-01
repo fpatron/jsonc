@@ -16,45 +16,42 @@ func stripComments(data []byte) []byte {
 	)
 
 	state := OUTSIDE
-	result := make([]byte, len(data))
-	copy(result, data)
+	result := make([]byte, 0, len(data))
 
-	for i := 0; i < len(result); i++ {
+	for i := 0; i < len(data); i++ {
 		switch state {
 		case OUTSIDE:
 			if data[i] == '/' && i+1 < len(data) {
 				if data[i+1] == '/' {
 					state = SINGLE_LINE
-					result[i] = ' '
-					result[i+1] = ' '
 					i++
 				} else if data[i+1] == '*' {
 					state = MULTI_LINE
-					result[i] = ' '
-					result[i+1] = ' '
 					i++
+				} else {
+					result = append(result, data[i])
 				}
-			} else if data[i] == '"' {
-				state = IN_STRING
+			} else {
+				if data[i] == '"' {
+					state = IN_STRING
+				}
+				result = append(result, data[i])
 			}
 		case SINGLE_LINE:
 			if data[i] == '\n' {
 				state = OUTSIDE
-			} else {
-				result[i] = ' '
+				result = append(result, '\n')
 			}
 		case MULTI_LINE:
-			if data[i] == '*' && i+1 < len(result) && data[i+1] == '/' {
+			if data[i] == '*' && i+1 < len(data) && data[i+1] == '/' {
 				state = OUTSIDE
-				result[i] = ' '
-				result[i+1] = ' '
 				i++
-			} else if result[i] != '\n' {
-				result[i] = ' '
 			}
 		case IN_STRING:
+			result = append(result, data[i])
 			if data[i] == '\\' && i+1 < len(data) {
 				i++
+				result = append(result, data[i])
 			} else if data[i] == '"' {
 				state = OUTSIDE
 			}
