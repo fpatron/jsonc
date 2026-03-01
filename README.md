@@ -1,8 +1,9 @@
-# jsonc - https://pkg.go.dev/github.com/fpatron/jsonc
+# jsonc
 
 [![Go CI](https://github.com/fpatron/jsonc/actions/workflows/go.yml/badge.svg)](https://github.com/fpatron/jsonc/actions/workflows/go.yml)
+[![Go Doc](https://img.shields.io/badge/godoc-reference-blue.svg)](http://godoc.org/github.com/fpatron/jsonc)
 
-`jsonc` is an extension of the JSON data format that allows single and multi line comments and provides accurate parsing errors.
+`jsonc` is an extension of the JSON data format that allows single and multi line comments.
 
 ## Instalation
 To install `jsonc`, use `go get`:   
@@ -13,7 +14,6 @@ To install `jsonc`, use `go get`:
 ## Features
 
 - **Comment Support**: Easily parse JSON files with single-line and multi-line comments.
-- **Accurate Errors**: Errors while parsing will match original commented JSON.
 - **Simple API**: Uses a familiar API similar to the standard `encoding/json` package.
 
 ## Usage
