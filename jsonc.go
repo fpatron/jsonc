@@ -14,7 +14,6 @@ func stripComments(data []byte) []byte {
 		OUTSIDE = iota
 		SINGLE_LINE
 		MULTI_LINE
-		MULTI_LINE_ENDING
 		IN_STRING
 	)
 
@@ -48,15 +47,13 @@ func stripComments(data []byte) []byte {
 			}
 		case MULTI_LINE:
 			if data[i] == '*' && i+1 < len(result) && data[i+1] == '/' {
-				state = MULTI_LINE_ENDING
+				state = OUTSIDE
 				result[i] = ' '
 				result[i+1] = ' '
 				i++
 			} else if result[i] != '\n' {
 				result[i] = ' '
 			}
-		case MULTI_LINE_ENDING:
-			state = OUTSIDE
 		case IN_STRING:
 			if data[i] == '\\' && i+1 < len(data) {
 				i++
