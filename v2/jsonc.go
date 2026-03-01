@@ -16,6 +16,32 @@ func stripComments(data []byte) []byte {
 	)
 
 	state := OUTSIDE
+	hasComment := false
+scanLoop:
+	for i := 0; i < len(data); i++ {
+		switch state {
+		case OUTSIDE:
+			if data[i] == '/' && i+1 < len(data) && (data[i+1] == '/' || data[i+1] == '*') {
+				hasComment = true
+				break scanLoop
+			}
+			if data[i] == '"' {
+				state = IN_STRING
+			}
+		case IN_STRING:
+			if data[i] == '\\' && i+1 < len(data) {
+				i++
+			} else if data[i] == '"' {
+				state = OUTSIDE
+			}
+		}
+	}
+
+	if !hasComment {
+		return data
+	}
+
+	state = OUTSIDE
 	result := make([]byte, 0, len(data))
 
 	for i := 0; i < len(data); i++ {
