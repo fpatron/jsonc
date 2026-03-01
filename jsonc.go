@@ -1,4 +1,4 @@
-package betterjson
+package jsonc
 
 import (
 	"encoding/json"

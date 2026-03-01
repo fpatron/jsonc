@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/fpatron/betterjson"
+	"github.com/fpatron/jsonc"
 )
 
 type Metadata struct {
@@ -48,7 +48,7 @@ func main() {
 	}
 
 	var example ExampleData
-	err = betterjson.Unmarshal(data, &example)
+	err = jsonc.Unmarshal(data, &example)
 	if err != nil {
 		log.Fatalf("Failed to parse example.json: %v", err)
 	}
